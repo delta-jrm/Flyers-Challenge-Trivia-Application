@@ -11,7 +11,7 @@ question_search_term = input ("Please input key words from question :")
 print(question_search_term)
 reference_pages = wikipedia.search(question_search_term)
 print(reference_pages)
-input_search = input ("Type number 0-4 to select option: ")
+input_search = input ("Type index number to select option: ")
 answer_page = str(wikipedia.page(reference_pages[int(input_search)]).content)
 print(answer_page)
 for x in range (1,5):
