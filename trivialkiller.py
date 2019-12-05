@@ -9,10 +9,7 @@ import json
 ascii_banner = pyfiglet.figlet_format("Trivial Killer V1.0")
 print(ascii_banner) 
 
-def capitalize_nth(s, n, m):
-    return s[:n].lower() + s[n:m].capitalize() + s[m:].lower()
-    print(s[n:m])
-
+# Function to find all occurances of a substring in a string. Returns the index locaiton of said substring.
 def find_all(a_str, sub):
     start = 0
     while True:
@@ -21,12 +18,13 @@ def find_all(a_str, sub):
         yield start
         start += len(sub) # use start += 1 to find overlapping matches
 
+# Load Trivia Database
 json_file = open('trivia-questions.json', encoding="utf8")
 trivia_question_bank = json.load(json_file)
 json_file.close()
 
 # Select Search Method to use or debug, remove this when both run in paralell.
-process_type = input ("Type 1 to select Wikipedia Scraping, Type 2 to select Database Search. Database is default search.")
+process_type = 2 #input ("Type 1 to select Wikipedia Scraping, Type 2 to select Database Search. Database is default search.")
 
 if process_type is "1":
     # Keyword input for wikipedia scraping search.
@@ -44,10 +42,14 @@ if process_type is "1":
 
     # Answer checker, each answer is run through and compared against the page. If answer exists, print 300 char before and after the index to display information.
     for x in range (1,5):
+
+        # Take input of potential answer from user and out print answer location
         potential_answer = input ("Answer " + str(x) + " :" )
         potential_answer = potential_answer.lower()
         answer_page = answer_page.lower()
         print(potential_answer in answer_page)
+
+        # If answer is in page, print 100 characters before and after answer occurance, capitalize answer.
         if potential_answer in answer_page:
             answer_location = find_all(answer_page, potential_answer)
             print(answer_location)

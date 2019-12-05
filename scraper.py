@@ -5,6 +5,9 @@ import pyfiglet
 import wikipedia
 import json
 
+ascii_banner = pyfiglet.figlet_format("Trivial Killer V1.0")
+print(ascii_banner) 
+
 # Function to find all occurances of a substring in a string. Returns the index locaiton of said substring.
 def find_all(a_str, sub):
     start = 0
@@ -47,10 +50,15 @@ def wiki_page_search(index_number, question, index, a, b, c, d):
                         print("\n" + answer_print + "\n")
 
 def database_search(question_search_term_data, z, y , x, w):
-    question_search_term_data = input ("Please input key words from question :")
-    print(question_search_term_data)
+    answer_list = []
+    answer_list.insert(0, z.lower())
+    answer_list.insert(1, y.lower())
+    answer_list.insert(2, x.lower())
+    answer_list.insert(3, w.lower())
+    
     trivia_question_bank_string = str(trivia_question_bank).lower()
-    if (question_search_term_data.lower() in trivia_question_bank_string):
+
+    if (str(question_search_term_data) in trivia_question_bank_string):
         question_location = find_all(trivia_question_bank_string, question_search_term_data.lower())
         print(question_location)
         for question in question_location:
@@ -60,7 +68,9 @@ def database_search(question_search_term_data, z, y , x, w):
             part_b =  "--->" + part_b.upper() + "<---"
             part_c = temp[len(question_search_term_data) + 100 : 200]
             question_print = "\n" + part_a + " " + part_b + part_c
-            print(question_print)
+            for q in question_search_term_data:
+                    if q in question_print:
+                        print("\n" + question_print + "\n")
 
 # Keyword input for wikipedia scraping search.
 question_search_term = input ("Please input key words from question :")
@@ -80,12 +90,15 @@ print(answer_search_term_c)
 answer_search_term_d = input ("Please input potential answer d :")
 print(answer_search_term_d)
 
+database_search(question_search_term, answer_search_term_a, answer_search_term_b, answer_search_term_c, answer_search_term_d)
+
  # Creates and prints list of possible matching pages for the search term.
 reference_pages = wikipedia.search(index_search_term)
 print(reference_pages)
 
 #Option selection and printing of the answer page.
 input_search = input ("Type index number to select option: ")
+
 wiki_page_search(input_search, question_search_term, index_search_term, answer_search_term_a, answer_search_term_b, answer_search_term_c, answer_search_term_d)
 
 
