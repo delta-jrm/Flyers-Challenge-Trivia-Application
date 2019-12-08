@@ -8,10 +8,21 @@ Application to solve questions in an efficient manor. Made for the purpose of th
     - pip install bs4
     - pip install pyfiglet
     - pip install wikipedia
-3. Run "python trivialkiller.py"
-4. The user will be prompted for key words. Take the example question: What is the largest planet in our Solar System?. The user would input "solar system"
-5. The user must select the correct webpage option. Keep in mind arrays start at 0, so the correct index to put in owuld be 0 in the solar system case.
-6. The user may start putting in more key words or answers. If the user puts in "largest planet", jupiter is revealed to be the correct answer.
+    - pip install json
+3. Run "python trivialkiller.py" for database search.
+4. The user will be prompted for key words. 
+    * Take the example question: What is the largest planet in our Solar System?. The user would input "largest planet"
+5. The database will output the occurances of largest planet. If there is not an occurance, the program will give a message that it was not contained.
+6. Run "python scraper.py" for wikipedia API search.
+7. On run, it will first ask for key words from the question. Terms are seperated by commas if there are multiple search questions.
+    * Take the example question: What was the band Oasis' debut album? The user would input "debut album". 
+8. The user must input a search term for the wikipedia webpage option. 
+    * The user may input "Oasis" for the example, as the debut album would be on the band's article page.
+9. The user must then input the multiple choice options available for the answer.
+    * For our example, the potential answers may be: Morning Glory, Definitely Maybe, Dark Side of the Moon, Madman Across the Water
+10. The user must then seleect the wikipedia page by inputting the index of the proper webpage. Keep in mind arrays start at 0.
+    * For our example, type 1 to select Oasis(band)
+11. All of the answers are output with a true or false statement saying they are contained within the page. if the answer and the question term are within the 100 character range, it will outprint the answer to the console with 100 characters before and after
 
 
 
@@ -34,3 +45,22 @@ Application to solve questions in an efficient manor. Made for the purpose of th
 
 - Goal: Implement more object oriented design strategy and investigate multithreading both methods of checking answers.
 - Goal: Optimize search through with use of key terms, but make sure valid questions are not being ignored
+
+# Version 2: 12/5/2019
+- Split up the wikipedia scraper and database search into two different programs to run.
+- scraper.py is the wikipedia scraper, triviakiller.py is the database search
+- Capitalized the answer when outprinted for easier reference.
+- Cut down answer output to 100 characters before and after
+- Created find_all method to find all occurances of answer on page.
+- Added feature to input all answers at the same time
+- Added feature to seperate question keywords and index search in scraper.py
+- Check done for keyword in the answer string, now only outputs answer if within 100 chars before or after
+- Goal Achieved: Optimize search through with use of key terms, but make sure valid questions are not being ignored 
+
+- ToDo: Create functions to open functionality.
+- ToDo: Implement answerchecking with database search.
+- ToDo: Create answer object to have all answers run in a multithreaded fashion to speed up the process
+- ToDo: Add menu to either select Wikipedia Scraping or Database Comparison until both are functional.
+- ToDo: Start building GUI interface for inputting key terms and questions if possible.
+
+- Goal: Implement more object oriented design strategy and investigate multithreading both methods of checking answers.

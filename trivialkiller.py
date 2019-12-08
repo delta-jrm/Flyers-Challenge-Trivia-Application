@@ -26,7 +26,8 @@ json_file.close()
 # Select Search Method to use or debug, remove this when both run in paralell.
 process_type = 2 #input ("Type 1 to select Wikipedia Scraping, Type 2 to select Database Search. Database is default search.")
 
-if process_type is "1":
+# Run Wikipedia Scraper if 1: TRIVIAKILLER IS CONFIGURED TO RUN DATABASE SEARCH
+if process_type == "1":
     # Keyword input for wikipedia scraping search.
     question_search_term = input ("Please input key words from question :")
     print(question_search_term)
@@ -62,6 +63,8 @@ if process_type is "1":
                 answer_print = "\n" + part_1 + " " + part_2 + part_3
                 print(answer_print)
 
+
+# Runs database search and looks for key words, capitalizes, and prints.
 else:
     question_search_term = input ("Please input key words from question :")
     print(question_search_term)
@@ -74,10 +77,12 @@ else:
             part_a = temp[0:99]
             part_b = temp[100 : 100 + len(question_search_term)]
             part_b =  "--->" + part_b.upper() + "<---"
-            part_c = temp[len(question_search_term) + 100 : 200]
+            part_c = temp[len(question_search_term) + 100 : 200] 
             question_print = "\n" + part_a + " " + part_b + part_c
             print(question_print)
-
+    else:
+        print("There is no occurance of " + question_search_term + " within the database. Please try again or consult scraper.py")
+                
 
 
 

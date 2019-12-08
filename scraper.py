@@ -17,14 +17,18 @@ def find_all(a_str, sub):
         yield start
         start += len(sub) # use start += 1 to find overlapping matches
 
-# Establish Database
+# Establish Database, not necessary unless multithreading implemented
 json_file = open('trivia-questions.json', encoding="utf8")
 trivia_question_bank = json.load(json_file)
 json_file.close()
 
+# Answer checker, each answer is run through and compared against the page. If answer exists, print 300 char before and after the index to display information.
 def wiki_page_search(index_number, question, index, a, b, c, d):
-    # Answer checker, each answer is run through and compared against the page. If answer exists, print 300 char before and after the index to display information.
+    
+    # Retrieves Wikipedia Page object through API
     answer_page = str(wikipedia.page(reference_pages[int(index_number)]).content).lower()
+
+    # Creates Reference dictionary for possible answers.
     answer_list = []
     answer_list.insert(0, a.lower())
     answer_list.insert(1, b.lower())
@@ -32,6 +36,7 @@ def wiki_page_search(index_number, question, index, a, b, c, d):
     answer_list.insert(3, d.lower())
     print(answer_list)
 
+    # Checks if answer is contained in page, prints true or false.
     for answer in answer_list:
         print("Answer " + answer.upper() + " contained in page: " +  str(answer in answer_page))
 
@@ -45,11 +50,17 @@ def wiki_page_search(index_number, question, index, a, b, c, d):
                 part_2 =  "--->" + part_2.upper() + "<---"
                 part_3 = temp[len(answer) + 100 : 200]
                 answer_print = "\n" + part_1 + " " + part_2 + part_3
+
+                # If the question term is within 100 characters of the answer, print the full answer line.
                 for q in question:
                     if q in answer_print:
                         print("\n" + answer_print + "\n")
 
+
+# Database searching, not currently implemented with multithreading. 
 def database_search(question_search_term_data, z, y , x, w):
+
+    # Creates Reference dictionary for possible answers.
     answer_list = []
     answer_list.insert(0, z.lower())
     answer_list.insert(1, y.lower())
@@ -58,6 +69,7 @@ def database_search(question_search_term_data, z, y , x, w):
     
     trivia_question_bank_string = str(trivia_question_bank).lower()
 
+    # Checks if answer is contained in page, prints true or false.
     if (str(question_search_term_data) in trivia_question_bank_string):
         question_location = find_all(trivia_question_bank_string, question_search_term_data.lower())
         print(question_location)
@@ -68,6 +80,8 @@ def database_search(question_search_term_data, z, y , x, w):
             part_b =  "--->" + part_b.upper() + "<---"
             part_c = temp[len(question_search_term_data) + 100 : 200]
             question_print = "\n" + part_a + " " + part_b + part_c
+
+            # If the question term is within 100 characters of the answer, print the full answer line.
             for q in question_search_term_data:
                     if q in question_print:
                         print("\n" + question_print + "\n")
@@ -90,7 +104,8 @@ print(answer_search_term_c)
 answer_search_term_d = input ("Please input potential answer d :")
 print(answer_search_term_d)
 
-database_search(question_search_term, answer_search_term_a, answer_search_term_b, answer_search_term_c, answer_search_term_d)
+# Implement this line to run the search in a multithreaded fashion if possible
+# database_search(question_search_term, answer_search_term_a, answer_search_term_b, answer_search_term_c, answer_search_term_d)
 
  # Creates and prints list of possible matching pages for the search term.
 reference_pages = wikipedia.search(index_search_term)
