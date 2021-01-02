@@ -1,0 +1,16 @@
+Application Name:
+Trivial Killer - Our Flyer's Challenge trivia application assistant.
+
+Participants:
+Jocelyn Murray, David Mendez
+
+High-Level Description:
+As a part of the Flyer Challenge, we will be working on a program tool to assist a human with solving trivia problems. This will be done through the user inputting search terms and answers. This information will be compared to a database of pre-written trivia questions. In the case that the questions do not exist in the database, information can be scraped from a wikipedia page through the use of Python's Wikipedia library.
+
+Detailed Application Description:
+ The application will be run through a CLI as of version one, with a GUI hopefully be implemented in a later version. On application run, the idea is to give the user to either run a question against a database or run a wikipedia-based trivia search. This is done through basic CLI input. 
+In the event that the Wikipedia option is selected, the user is then asked to input keywords. These keywords are put through the search function, which returns an array of options. The user puts in the index of the correct option. After the correct option is selected, the wikipedia page is converted to a string and printed for reference. After this, the user is prompted to input a potential answer. If the answer is contained within the page, the console returns true along with the index of the occurrence with 300 characters before and after the occurrence. There are 4 potential answers that can be input. 
+	In the case that the database option is selected, the user will be prompted for key terms in the question. There will be a method written to parse through the database of questions to pull out the questions and answers of the questions that correspond with the key terms that is input. Along with this, the user may also have the option to input the answers instead of the keywords. That function might not be as helpful however. The database should not be fully relied upon until integration is done. Version 1 Does not have integration finished.
+
+Object Oriented Principles and Languages:
+The language we are using is Python for writing this application. This is mostly due to the integration available with wikipedia libraries as well as lxml. Most of the object oriented nature will probably be implemented when the GUI is made in its entirety. The wikipedia library deals with the pages as individual objects. One thought that we had was to do a multithreaded search against wikipedia and the database at the same time, so that would mostly consist of making an object bank of potential answers or places where information may be pulled. Also, as of version 1, answers are put in one at a time, but if the answers are made into objects, this may simplify the process even more and make it more efficient with multithreading as well.
